@@ -20,3 +20,4 @@ var animate = new Animation.init(animJson, {repeat: 0});
 animate.start();
 ```
 new changes
+new changes 2
