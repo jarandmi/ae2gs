@@ -13,4 +13,6 @@ jobs:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   script: |
                       const { issue: { number: issue_number }, repo: { owner, repo }, payload } = context;
-                      github.issues.createComment({ issue_number, owner, repo, body: `Hello world ! 👋 ${payload.pull_request.head.ref}` });
+                      var prName = payload.pull_request.head.ref.match(/feature\/(.+)/)[1]
+                      host = `${prName}.feature.shiftx.com`
+                      github.issues.createComment({ issue_number, owner, repo, body: `Feature url: https://${host}` });
