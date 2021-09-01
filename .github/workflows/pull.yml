@@ -13,4 +13,4 @@ jobs:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   script: |
                       const { issue: { number: issue_number }, repo: { owner, repo }, payload } = context;
-                      github.issues.createComment({ issue_number, owner, repo, body: 'Hello world ! 👋' });
+                      github.issues.createComment({ issue_number, owner, repo, body: `Hello world ! 👋 ${"testing"}` });
