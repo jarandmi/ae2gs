@@ -13,9 +13,13 @@ jobs:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   script: |
                       const { issue: { number: issue_number }, repo: { owner, repo }, payload } = context;
-                      console.log("payload", payload)
-                      var prName = payload.pull_request.head.ref.match(/feature\/(.+)/)[1]
-                      host = `${prName}.feature.shiftx.com`
-                      const commitTime = ""
-                      const version =  new Date(Date.parse(commitTime)).toISOString().substr(0, 19) + "Z"
+                      const prName = payload.pull_request.head.ref.match(/feature\/(.+)/)[1]
+                      const sha = payload.pull_request.head.sha.substring(0,7)
+                      const date = payload.pull_request.updated_at
+                      const dateString = new Date(Date.parse(date)).toISOString().substr(0, 19) + "Z"
+                      const version = `${dateString}-${sha}`
+
+                      console.log("version", version)
+
+                      const host = `${prName}.feature.shiftx.com?setVersion=${version}`
                       github.issues.createComment({ issue_number, owner, repo, body: `Feature url: https://${host}` });
