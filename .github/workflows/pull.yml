@@ -20,6 +20,7 @@ jobs:
                       const version = `${dateString}-${sha}`
 
                       console.log("version", version)
+                      console.log("date123", date)
 
                       const host = `${prName}.feature.shiftx.com?setVersion=${version}`
                       github.issues.createComment({ issue_number, owner, repo, body: `Feature url: https://${host}` });
